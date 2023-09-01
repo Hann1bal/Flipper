@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flipper", "Flipper\Flipper.csproj", "{E974DEC7-DBCD-4107-9D46-D85C04BA5C26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E974DEC7-DBCD-4107-9D46-D85C04BA5C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E974DEC7-DBCD-4107-9D46-D85C04BA5C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E974DEC7-DBCD-4107-9D46-D85C04BA5C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E974DEC7-DBCD-4107-9D46-D85C04BA5C26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

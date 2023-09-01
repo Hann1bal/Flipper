@@ -1,0 +1,113 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\asset-manifest.json",
+      "PackagePath": "staticwebassets\\asset-manifest.json"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\logo192.png",
+      "PackagePath": "staticwebassets\\logo192.png"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\logo512.png",
+      "PackagePath": "staticwebassets\\logo512.png"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\manifest.json",
+      "PackagePath": "staticwebassets\\manifest.json"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\robots.txt",
+      "PackagePath": "staticwebassets\\robots.txt"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\css\\main.d17acecc.css",
+      "PackagePath": "staticwebassets\\static\\css\\main.d17acecc.css"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\css\\main.d17acecc.css.map",
+      "PackagePath": "staticwebassets\\static\\css\\main.d17acecc.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\787.80ae8878.chunk.js",
+      "PackagePath": "staticwebassets\\static\\js\\787.80ae8878.chunk.js"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\787.80ae8878.chunk.js.map",
+      "PackagePath": "staticwebassets\\static\\js\\787.80ae8878.chunk.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.b704e4c1.js",
+      "PackagePath": "staticwebassets\\static\\js\\main.b704e4c1.js"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.b704e4c1.js.LICENSE.txt",
+      "PackagePath": "staticwebassets\\static\\js\\main.b704e4c1.js.LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.b704e4c1.js.map",
+      "PackagePath": "staticwebassets\\static\\js\\main.b704e4c1.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.bb641210.js",
+      "PackagePath": "staticwebassets\\static\\js\\main.bb641210.js"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.bb641210.js.LICENSE.txt",
+      "PackagePath": "staticwebassets\\static\\js\\main.bb641210.js.LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.bb641210.js.map",
+      "PackagePath": "staticwebassets\\static\\js\\main.bb641210.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.bed0d2b8.js",
+      "PackagePath": "staticwebassets\\static\\js\\main.bed0d2b8.js"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.bed0d2b8.js.LICENSE.txt",
+      "PackagePath": "staticwebassets\\static\\js\\main.bed0d2b8.js.LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.bed0d2b8.js.map",
+      "PackagePath": "staticwebassets\\static\\js\\main.bed0d2b8.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.ebb3b5a8.js",
+      "PackagePath": "staticwebassets\\static\\js\\main.ebb3b5a8.js"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.ebb3b5a8.js.LICENSE.txt",
+      "PackagePath": "staticwebassets\\static\\js\\main.ebb3b5a8.js.LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\wwwroot\\static\\js\\main.ebb3b5a8.js.map",
+      "PackagePath": "staticwebassets\\static\\js\\main.ebb3b5a8.js.map"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.Flipper.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.build.Flipper.props",
+      "PackagePath": "build\\Flipper.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.Flipper.props",
+      "PackagePath": "buildMultiTargeting\\Flipper.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildTransitive.Flipper.props",
+      "PackagePath": "buildTransitive\\Flipper.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
