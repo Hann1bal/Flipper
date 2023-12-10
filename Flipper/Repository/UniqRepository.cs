@@ -23,9 +23,10 @@ public class UniqRepository : IBaseRepository<Uniq>
     public async Task AddRange(List<Uniq> items)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
+        var uniqList = await context.Uniqs.ToListAsync();
         foreach (var item in items)
         {
-            var uniq = context.Uniqs.FirstOrDefault(c => c.idCards == item.idCards && (c.links == item.links));
+            var uniq = uniqList.FirstOrDefault(c => c.idCards == item.idCards && (c.links == item.links));
             if (uniq != null)
             {
                 uniq.links = item.links;
@@ -51,9 +52,19 @@ public class UniqRepository : IBaseRepository<Uniq>
         await context.SaveChangesAsync();
     }
 
+    public Task UpdateRange(List<Uniq> item)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<Uniq>> GetRange()
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
         return await context.Uniqs.Include(c => c.explicitModifiers).ToListAsync();
+    }
+
+    public Task<Currency> Get(string name, string detailsId)
+    {
+        throw new NotImplementedException();
     }
 }

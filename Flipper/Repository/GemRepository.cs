@@ -23,13 +23,23 @@ public class GemRepository : IBaseRepository<Gem>
     public async Task AddRange(List<Gem> items)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
+        var gemList = await context.Gem.ToListAsync();
         foreach (var item in items)
         {
-            if (context.Gem.Any(c => c.idCards == item.idCards && c.name == item.name))
-                context.Gem.Update(item);
-            else await context.Gem.AddRangeAsync(item);
+            var gem = gemList.FirstOrDefault(c => c.idCards == item.idCards);
+            if (gem != null)
+            {
+                gem.explicitModifiers = item.explicitModifiers;
+                gem.chaosValue = item.chaosValue;
+                gem.divineValue = item.divineValue;
+                gem.count = item.count;
+                gem.icon = item.icon;
+                gem.baseType = item.baseType;
+                gem.idCards = item.idCards;
+                context.Gem.Update(gem);
+            }
+            else await context.Gem.AddAsync(item);
         }
-
         await context.SaveChangesAsync();
     }
 
@@ -40,9 +50,19 @@ public class GemRepository : IBaseRepository<Gem>
         await context.SaveChangesAsync();
     }
 
+    public Task UpdateRange(List<Gem> item)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<Gem>> GetRange()
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
         return await context.Gem.Include(c => c.explicitModifiers).ToListAsync();
+    }
+
+    public Task<Currency> Get(string name, string detailsId)
+    {
+        throw new NotImplementedException();
     }
 }

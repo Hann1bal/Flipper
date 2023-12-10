@@ -22,10 +22,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 
 builder.Services.AddDbContextFactory<FlipperContext>
 (
-    optionsBuilder =>
-    {
-        optionsBuilder.EnableDetailedErrors(false);
-    }
+    optionsBuilder => { optionsBuilder.EnableDetailedErrors(false); }
 );
 
 builder.Services.AddHttpClient("KnB_API", config =>
@@ -35,10 +32,16 @@ builder.Services.AddHttpClient("KnB_API", config =>
     config.DefaultRequestHeaders.Clear();
 });
 builder.Services.AddSingleton<ApiRequestSenderService>();
-builder.Services.AddScoped<IBaseRepository<Cards>, CardRepository>();
-builder.Services.AddScoped<IBaseRepository<Currency>, CurrencyRepository>();
-builder.Services.AddScoped<IBaseRepository<Gem>, GemRepository>();
-builder.Services.AddScoped<IBaseRepository<Uniq>, UniqRepository>();
+builder.Services.AddSingleton<IBaseRepository<Cards>, CardRepository>();
+builder.Services.AddSingleton<IBaseRepository<Currency>, CurrencyRepository>();
+builder.Services.AddSingleton<IBaseRepository<Gem>, GemRepository>();
+builder.Services.AddSingleton<IBaseRepository<Uniq>, UniqRepository>();
+builder.Services.AddSingleton<HttpNinjaService>();
+
+builder.Services.AddSingleton<UpdateService>();
+
+builder.Services.AddHostedService<TimerService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -61,6 +64,9 @@ app.UseStaticFiles();
 app.MapFallbackToFile("index.html");
 
 app.MapControllers();
-Console.WriteLine($"open in http://localhost:5027/index.html");
-
+System.Diagnostics.Process.Start(new ProcessStartInfo
+{
+    FileName = "http://localhost:5027/index.html",
+    UseShellExecute = true
+});
 app.Run("http://localhost:5027");

@@ -40,9 +40,19 @@ public class CurrencyRepository:IBaseRepository<Currency>
         await context.SaveChangesAsync();
     }
 
+    public Task UpdateRange(List<Currency> item)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<Currency>> GetRange()
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
         return await context.Currency.ToListAsync();
+    }
+    public async Task<Currency> Get (string name, string detailsId)
+    {
+        await using var context = await _contextFactory.CreateDbContextAsync();
+        return await context.Currency.FirstOrDefaultAsync(c => c.name == name  || c.detailsId == detailsId );
     }
 }
