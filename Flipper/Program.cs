@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Flipper;
+using Flipper.Hubs;
 using Flipper.Models;
 using Flipper.Repository;
 using Flipper.Services;
@@ -12,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-        corsPolicyBuilder => { corsPolicyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
+        corsPolicyBuilder => { corsPolicyBuilder.WithOrigins("http://localhost:5175").AllowAnyMethod().AllowAnyHeader().AllowCredentials(); });
 });
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
@@ -41,7 +42,7 @@ builder.Services.AddSingleton<HttpNinjaService>();
 builder.Services.AddSingleton<UpdateService>();
 
 builder.Services.AddHostedService<TimerService>();
-
+builder.Services.AddSignalR();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -69,4 +70,5 @@ System.Diagnostics.Process.Start(new ProcessStartInfo
     FileName = "http://localhost:5027/index.html",
     UseShellExecute = true
 });
+app.MapHub<GetDataHub>("/data");
 app.Run("http://localhost:5027");
