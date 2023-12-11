@@ -17,7 +17,8 @@ public class GetDataHub : Hub
     public async override Task OnConnectedAsync()
 
     {
-        var datas = new { cards = await _repository.GetRange() };
+        var cards = await _repository.GetRange();
+        var datas = new { cards = cards.Where(c => c.profitChaos > 3).ToList() };
 
         var data = JsonConvert.SerializeObject(datas);
         await Clients.All.SendAsync("GetData", data);
@@ -26,8 +27,8 @@ public class GetDataHub : Hub
 
     public async Task GetData()
     {
-        var datas = new { cards = await _repository.GetRange() };
-
+        var cards = await _repository.GetRange();
+        var datas = new { cards = cards.Where(c => c.profitChaos > 3).ToList() };
         var data = JsonConvert.SerializeObject(datas);
         await Clients.All.SendAsync("GetData", data);
     }

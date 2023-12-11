@@ -1,10 +1,5 @@
 C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\appsettings.Development.json
 C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\appsettings.json
-C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\Interface\flipper_inteface\build\asset-manifest.json
-C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\Interface\flipper_inteface\build\manifest.json
-C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\Interface\flipper_inteface\package-lock.json
-C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\Interface\flipper_inteface\package.json
-C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\Interface\flipper_inteface\public\manifest.json
 C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\Flipper.staticwebassets.runtime.json
 C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\Flipper.exe
 C:\Users\Andrey\RiderProjects\Flipper\Flipper\bin\Release\net7.0\Flipper.deps.json

@@ -47,19 +47,23 @@ public class UpdateService
         {
             var card2 = cards.FirstOrDefault(c => c.idCards == card.idCards);
             var obj = await DescriptionPreprocessor.Process(card.explicitModifiers.First().text);
-            card.icon = DescriptionPreprocessor.NameProcessing(card.name);
+            var t = DescriptionPreprocessor.FlowerTextProccessor(card.flavourText!.Replace("\n", " "));
+            card.flavourText = t;
             card.count = card2.count;
+            card.icon = DescriptionPreprocessor.NameProcessing(card.name);
             card.itemFromCardCount = obj.itemFromCardCount;
             card.itemFromCard = obj.itemFromCard;
             card.itemFromCardIsCorrupted = obj.itemFromCardIsCorrupted;
             card.stackSize = card.stackSize == 0 ? 1 : card.stackSize;
+            card.flavourText = card.flavourText;
             card.fullStackChaosPrice = card2.stackSize * card.chaosValue;
             card.fullStackDivinePrice = card2.stackSize * card.divineValue;
+            card.explicitModifiers = card2.explicitModifiers;
             switch (obj.type)
             {
                 case TypeCard.Gem:
-                    if(obj.shortName.Contains("Enlighten")) Console.WriteLine("1");
-                    gemsItemTmp = gems.Where(c => c.name.Contains(obj.shortName)).Where(s=>s.gemLevel==obj.level).FirstOrDefault();
+                    gemsItemTmp = gems.Where(c => c.name.Contains(obj.shortName)).Where(s => s.gemLevel == obj.level)
+                        .FirstOrDefault();
                     if (gemsItemTmp != null)
                     {
                         card.profitChaos = gemsItemTmp.chaosValue - card2.fullStackChaosPrice;
@@ -141,6 +145,8 @@ public class UpdateService
         foreach (var card in insertList)
         {
             var obj = await DescriptionPreprocessor.Process(card.explicitModifiers.First().text);
+            var t = DescriptionPreprocessor.FlowerTextProccessor(card.flavourText.Replace("\n", " "));
+            card.flavourText = t;
             card.icon = DescriptionPreprocessor.NameProcessing(card.name);
             card.itemFromCardCount = obj.itemFromCardCount;
             card.itemFromCard = obj.itemFromCard;

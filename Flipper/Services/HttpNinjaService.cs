@@ -46,20 +46,17 @@ public class HttpNinjaService
             list.AddRange(JsonConvert.DeserializeObject<ResponseUniqDto>(responseUniq)!.lines);
         }
 
-        await _repository.AddRange(JsonConvert.DeserializeObject<ResponseDto>(response).lines);
-        Console.WriteLine($"Write cards");
-
         await _baseRepository.AddRange(list);
-        Console.WriteLine($"Write uniq");
+        Console.WriteLine("Write uniq");
 
         await _gem.AddRange(JsonConvert.DeserializeObject<ResponseGemDto>(responseGem)!.lines);
-        Console.WriteLine($"Write gem");
+        Console.WriteLine("Write gem");
 
         await _currency.AddRange(JsonConvert.DeserializeObject<ResponseCurrencyDto>(responseCurrency)!.lines);
-        Console.WriteLine($"Write currency");
+        Console.WriteLine("Write currency");
 
         await _updateService.UpdateCards(JsonConvert.DeserializeObject<ResponseDto>(response)!.lines);
-        Console.WriteLine($"Write update");
+        Console.WriteLine("Write update");
 
     }
 }

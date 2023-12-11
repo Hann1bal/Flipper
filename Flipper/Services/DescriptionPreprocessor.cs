@@ -5,6 +5,14 @@ namespace Flipper.Services;
 
 public class DescriptionPreprocessor
 {
+    public static string FlowerTextProccessor(string text)
+    {
+        Regex regex = new Regex(@"{(.*?)}");
+        MatchCollection textedList = regex.Matches(text);
+        return textedList.ToList().Count > 0 ? textedList.First().Value.Replace("{","").Replace("}", "") : text;
+
+
+    }
     public static async Task<TransferDto> Process(string description)
     {
         bool corrupted = description.Contains("<corrupted>");

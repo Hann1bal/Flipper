@@ -60,6 +60,7 @@ app.UseHttpsRedirection();
 app.UseCors();
 
 app.UseAuthorization();
+app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapFallbackToFile("index.html");
