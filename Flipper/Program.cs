@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-        corsPolicyBuilder => { corsPolicyBuilder.WithOrigins("http://localhost:5175").AllowAnyMethod().AllowAnyHeader().AllowCredentials(); });
+        corsPolicyBuilder => { corsPolicyBuilder.WithOrigins("http://localhost:5175", "http://localhost:5173").AllowAnyMethod().AllowAnyHeader().AllowCredentials(); });
 });
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>

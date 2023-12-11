@@ -6,6 +6,7 @@ public class Cards : BaseItemModel
 {
     public int stackSize { get; set; }
     public string? itemFromCard { get; set; }
+    public string? flavourText { get; set; }
     public bool? itemFromCardIsCorrupted { get; set; }
     public int? itemFromCardCount { get; set; }
     

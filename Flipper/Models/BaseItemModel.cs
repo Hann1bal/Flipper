@@ -5,8 +5,7 @@ namespace Flipper.Models;
 
 public class BaseItemModel
 {
-    [JsonIgnore] public int id { get; set; }
-    [Key] [JsonProperty("id")] public int idCards { get; set; }
+    [Key] [JsonProperty("id")] public int? idCards { get; set; }
     public string name { get; set; }
     public Uri icon { get; set; }
     public float chaosValue { get; set; }

@@ -28,7 +28,7 @@ public class TestController :ControllerBase
 
     [HttpGet]
     [Route("TryParse")]
-    public async Task<IActionResult> TryToParse()
+    public async Task<ActionResult<Cards>> TryToParse()
     {
         var result2 = await _repository.GetRange();
         return Ok(result2.Where(c=>c.profitChaos>10));
