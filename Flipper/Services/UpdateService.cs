@@ -30,6 +30,7 @@ public class UpdateService
     // }
     public async Task UpdateCards(List<Cards> cardsList)
     {
+        
         divine = await _currency.Get("Divine Orb", "divine-orb");
         currency = await _currency.GetRange();
         uniqs = await _uniq.GetRange();
@@ -75,7 +76,6 @@ public class UpdateService
                     }
                     else
                     {
-                        Console.WriteLine($"{obj.itemFromCard} - {card2.name}");
                     }
 
                     break;
@@ -97,7 +97,6 @@ public class UpdateService
                     }
                     else
                     {
-                        Console.WriteLine($"{obj.itemFromCard} - {card2.name}");
                     }
 
                     break;
@@ -114,7 +113,6 @@ public class UpdateService
                     }
                     else
                     {
-                        Console.WriteLine($"{obj.itemFromCard} - {card2.name}");
                     }
 
                     break;
@@ -132,7 +130,6 @@ public class UpdateService
                     }
                     else
                     {
-                        Console.WriteLine($"{obj.itemFromCard} - {card2.name}");
                     }
 
                     break;
@@ -169,7 +166,6 @@ public class UpdateService
                     }
                     else
                     {
-                        Console.WriteLine($"New Item = {obj.itemFromCard} - {card.name}");
                     }
 
                     break;
@@ -191,7 +187,6 @@ public class UpdateService
                     }
                     else
                     {
-                        Console.WriteLine($"New Item = {obj.itemFromCard} - {card.name}");
                     }
 
                     break;
@@ -208,7 +203,6 @@ public class UpdateService
                     }
                     else
                     {
-                        Console.WriteLine($"New Item = {obj.itemFromCard} - {card.name}");
                     }
 
                     break;
@@ -226,7 +220,6 @@ public class UpdateService
                     }
                     else
                     {
-                        Console.WriteLine($"New Item {obj.itemFromCard} - {card.name}");
                     }
 
                     break;

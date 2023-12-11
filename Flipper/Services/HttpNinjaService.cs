@@ -28,35 +28,22 @@ public class HttpNinjaService
     public async Task StartSync()
     {
         var list = new List<Uniq>();
-        Console.WriteLine("Get Cards");
         var response = await _api.GetAsync("Affliction", "DivinationCard", "itemoverview", "{0}/{3}?league={1}&type={2}");
-        Console.WriteLine("Get Currency");
 
         var responseCurrency =
             await _api.GetAsync("Affliction", "Currency", "currencyoverview", "{0}/{3}?league={1}&type={2}");
-        Console.WriteLine("Get SkillGem");
-
         var responseGem = await _api.GetAsync("Affliction", "SkillGem", "itemoverview", "{0}/{3}?league={1}&type={2}");
         foreach (var type in new List<string>
                      { "UniqueAccessory", "UniqueArmour", "UniqueWeapon", "UniqueFlask", "UniqueJewel" })
         {
-            Console.WriteLine($"Get {type}");
-
             var responseUniq = await _api.GetAsync("Affliction", type, "itemoverview", "{0}/{3}?league={1}&type={2}");
             list.AddRange(JsonConvert.DeserializeObject<ResponseUniqDto>(responseUniq)!.lines);
         }
 
         await _baseRepository.AddRange(list);
-        Console.WriteLine("Write uniq");
-
         await _gem.AddRange(JsonConvert.DeserializeObject<ResponseGemDto>(responseGem)!.lines);
-        Console.WriteLine("Write gem");
-
         await _currency.AddRange(JsonConvert.DeserializeObject<ResponseCurrencyDto>(responseCurrency)!.lines);
-        Console.WriteLine("Write currency");
-
         await _updateService.UpdateCards(JsonConvert.DeserializeObject<ResponseDto>(response)!.lines);
-        Console.WriteLine("Write update");
 
     }
 }

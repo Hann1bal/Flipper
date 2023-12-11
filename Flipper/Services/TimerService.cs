@@ -3,11 +3,13 @@
 public class TimerService : BackgroundService, IDisposable
 {
     private readonly HttpNinjaService _httpNinjaService;
+    private readonly CharacterListDownloaderService _characterList;
     private Timer? _timer = null;
-
-    public TimerService(HttpNinjaService httpNinjaService)
+    
+    public TimerService(HttpNinjaService httpNinjaService, CharacterListDownloaderService characterList)
     {
         _httpNinjaService = httpNinjaService;
+        _characterList = characterList;
     }
 
 
@@ -19,9 +21,10 @@ public class TimerService : BackgroundService, IDisposable
     }
 
 
-    private void DoWork(object? state)
+    private async void DoWork(object? state)
     {
         _httpNinjaService.StartSync();
+        await _characterList.GetCsv();
     }
 
 

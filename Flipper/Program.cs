@@ -40,6 +40,7 @@ builder.Services.AddSingleton<IBaseRepository<Uniq>, UniqRepository>();
 builder.Services.AddSingleton<HttpNinjaService>();
 
 builder.Services.AddSingleton<UpdateService>();
+builder.Services.AddSingleton<CharacterListDownloaderService>();
 
 builder.Services.AddHostedService<TimerService>();
 builder.Services.AddSignalR();

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "K3pL6GWSAlUxKO8/DUhyKSj48mHL6rxf26NbABYQ+S4aUwfijge+yH4vSoDg6/dJvIcq2qUwawPSPLeClbmkSQ==",
+  "dgSpecHash": "B8L68sd/Sy3wrpF76o9fkgDA/ytr4Z2rw0mRj3HdRgmvpGL4dX4aH5RSOxehuEvQA1JdTp9Vqzg1xV68D1JJhA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Andrey\\RiderProjects\\Flipper\\Flipper\\Flipper.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Andrey\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\Andrey\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Andrey\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.10\\microsoft.aspnetcore.jsonpatch.7.0.10.nupkg.sha512",
     "C:\\Users\\Andrey\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.10\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.10.nupkg.sha512",
