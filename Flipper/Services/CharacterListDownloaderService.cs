@@ -1,4 +1,5 @@
 ﻿using Flipper.Models;
+using Flipper.Repository;
 
 namespace Flipper.Services;
 
@@ -6,41 +7,59 @@ public class CharacterListDownloaderService
 {
     private const string _baseUrl = "https://www.pathofexile.com/ladder/export-csv/league/{0}?realm=pc";
     private readonly ApiRequestSenderService _sender;
-    private List<Accounts> AccountsList = new List<Accounts>();
+    private readonly IBaseRepository<Account> _repository;
 
-    public CharacterListDownloaderService(ApiRequestSenderService sender)
+    public CharacterListDownloaderService(ApiRequestSenderService sender, IBaseRepository<Account> repository)
     {
         _sender = sender;
+        _repository = repository;
     }
 
-    private void Parse(string data)
+    private async Task Parse(string data)
     {
+        var AccountsList = new List<Account>();
+        var AccountsListAdd = new List<Account>();
+        var AccountsListUpdate = new List<Account>();
         var t = data.Split("\n");
         foreach (var ts in t)
         {
+            var acc = new Account();
             var attrs = ts.Split(",");
-            if(attrs.Length<=1)continue;
-            var acc = new Accounts();
+            if (attrs.Length <= 1) continue;
             if (attrs.Contains("Rank")) continue;
             int.TryParse(attrs[0], out var rank);
             acc.Rank = rank;
-            Console.WriteLine(rank);
-            Console.WriteLine(ts);
-            acc.Account = attrs[1];
-            acc.Characters = new List<string>() { attrs[2] };
-            acc.Class = attrs[3];
+            acc.AccountName = attrs[1];
             int.TryParse(attrs[4], out var level);
-            acc.Level = level;
-            long.TryParse(attrs[0], out var exp);
-            acc.Experiance = exp;
+            long.TryParse(attrs[5], out var exp);
+
+            acc.Characters = new List<Character>()
+            {
+                new ()
+                {
+                    Class = attrs[3],
+                    Level = level,
+                    Experiance = exp,
+                    Name = attrs[2]
+                }
+            };
             AccountsList.Add(acc);
         }
+
         Console.WriteLine(t);
+        foreach (var acc in await _repository.GetRange())
+        {
+            if (AccountsList.Contains(acc)) AccountsListUpdate.Add(acc);
+            else AccountsListAdd.Add(acc);
+        }
+
+        await _repository.AddRange(AccountsListAdd);
+        await _repository.UpdateRange(AccountsListUpdate);
     }
 
     public async Task GetCsv()
     {
         var chars = await _sender.GetFileAsync("Affliction", _baseUrl);
-        Parse(chars);
+        await Parse(chars);
     }
 }

@@ -37,6 +37,7 @@ builder.Services.AddSingleton<IBaseRepository<Cards>, CardRepository>();
 builder.Services.AddSingleton<IBaseRepository<Currency>, CurrencyRepository>();
 builder.Services.AddSingleton<IBaseRepository<Gem>, GemRepository>();
 builder.Services.AddSingleton<IBaseRepository<Uniq>, UniqRepository>();
+builder.Services.AddSingleton<IBaseRepository<Account>, AccountRepository>();
 builder.Services.AddSingleton<HttpNinjaService>();
 
 builder.Services.AddSingleton<UpdateService>();

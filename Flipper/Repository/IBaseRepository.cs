@@ -8,5 +8,5 @@ public interface IBaseRepository<T> where T:class
     public  Task UpdateRange(List<T> item);
 
     public Task<List<T>> GetRange();
-    public Task<Currency> Get(string name, string detailsId);
+    public Task<T> Get(string name, string detailsId);
 }

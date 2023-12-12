@@ -61,7 +61,7 @@ public class GemRepository : IBaseRepository<Gem>
         return await context.Gem.Include(c => c.explicitModifiers).ToListAsync();
     }
 
-    public Task<Currency> Get(string name, string detailsId)
+    public Task<Gem> Get(string name, string detailsId)
     {
         throw new NotImplementedException();
     }

@@ -48,7 +48,7 @@ public class CardRepository : IBaseRepository<Cards>
         await context.SaveChangesAsync();
     }
 
-    public Task<Currency> Get(string name, string detailsId)
+    public Task<Cards> Get(string name, string detailsId)
     {
         throw new NotImplementedException();
     }

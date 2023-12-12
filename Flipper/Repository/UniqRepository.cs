@@ -63,7 +63,7 @@ public class UniqRepository : IBaseRepository<Uniq>
         return await context.Uniqs.Include(c => c.explicitModifiers).ToListAsync();
     }
 
-    public Task<Currency> Get(string name, string detailsId)
+    public Task<Uniq> Get(string name, string detailsId)
     {
         throw new NotImplementedException();
     }
