@@ -40,15 +40,15 @@ public class ApiRequestSenderService
     //
     //     Console.WriteLine("FileDownloaded");
     // }
-    public async Task<string> GetFileAsync(string league, string url = "")
+    public async Task<string> GetFileAsync(string league, int cl, int asc, int offeset, string url = "")
     {
         var client = _clientFactory.CreateClient();
-        Console.WriteLine("start");
+        Console.WriteLine($"start for class {cl} - {asc} and offset = {offeset}");
         var message = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
             RequestUri =
-                new Uri(string.Format(url, league))
+                new Uri(string.Format(url, league, cl, asc, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds()))
         };
         var httpResponse = await client.SendAsync(message).ConfigureAwait(false);
         Console.WriteLine("end");

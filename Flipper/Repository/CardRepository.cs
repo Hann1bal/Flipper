@@ -27,6 +27,11 @@ public class CardRepository : IBaseRepository<Cards>
         await context.SaveChangesAsync();
     }
 
+    public Task Upsert(List<Cards> item)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task Update(Cards item)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();

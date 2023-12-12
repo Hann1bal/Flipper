@@ -23,7 +23,12 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 
 builder.Services.AddDbContextFactory<FlipperContext>
 (
-    optionsBuilder => { optionsBuilder.EnableDetailedErrors(false); }
+    optionsBuilder =>
+    {
+        optionsBuilder.EnableDetailedErrors(false);
+        optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+    }
 );
 
 builder.Services.AddHttpClient("KnB_API", config =>

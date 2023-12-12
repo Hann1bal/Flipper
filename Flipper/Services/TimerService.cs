@@ -24,7 +24,7 @@ public class TimerService : BackgroundService, IDisposable
     private async void DoWork(object? state)
     {
         _httpNinjaService.StartSync();
-        await _characterList.GetCsv();
+        await _characterList.GetAccountFromLadder();
     }
 
 

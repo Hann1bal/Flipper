@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Flipper.Models;
 
 public class Account
 {
-
-    public int Rank { get; set; }
-    [Key]
-    public string AccountName { get; set; }
-    public List<Character> Characters { get; set; } = new List<Character>();
+    [Key] [Newtonsoft.Json.JsonIgnore] public long id { get; set; }
+    [JsonPropertyName("class")] public string AccountName { get; set; }
+    [JsonPropertyName("characters")] public List<Character> characters { get; set; } = new List<Character>();
 }

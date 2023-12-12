@@ -33,6 +33,11 @@ public class CurrencyRepository:IBaseRepository<Currency>
         await context.SaveChangesAsync();
     }
 
+    public Task Upsert(List<Currency> item)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task Update(Currency item)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();

@@ -1,5 +1,6 @@
 ﻿using Flipper.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Flipper.Repository;
 
@@ -12,7 +13,7 @@ public class AccountRepository : IBaseRepository<Account>
         _contextFactory = contextFactory;
     }
 
-    public async Task Add(Account item)
+    public async Task Add(Account? item)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
         await context.Accounts.AddAsync(item);
@@ -27,7 +28,12 @@ public class AccountRepository : IBaseRepository<Account>
         await context.SaveChangesAsync();
     }
 
-    public async Task Update(Account item)
+    public async Task Upsert(List<Account> item)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task Update(Account? item)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
 
@@ -43,15 +49,15 @@ public class AccountRepository : IBaseRepository<Account>
         await context.SaveChangesAsync();
     }
 
-    public async Task<List<Account>> GetRange()
+    public async Task<List<Account?>> GetRange()
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
-        return await context.Accounts.ToListAsync();
+        return await context.Accounts.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Account> Get(string name, string t)
+    public async Task<Account?> Get(string name, string t)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
-        return await context.FindAsync<Account>(name);
+        return await context.Accounts.AsNoTracking().FirstOrDefaultAsync(c => c.AccountName == name);
     }
 }

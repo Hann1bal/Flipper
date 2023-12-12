@@ -45,6 +45,11 @@ public class UniqRepository : IBaseRepository<Uniq>
         await context.SaveChangesAsync();
     }
 
+    public Task Upsert(List<Uniq> item)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task Update(Uniq item)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();

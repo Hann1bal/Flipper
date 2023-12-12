@@ -43,6 +43,11 @@ public class GemRepository : IBaseRepository<Gem>
         await context.SaveChangesAsync();
     }
 
+    public Task Upsert(List<Gem> item)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task Update(Gem item)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
