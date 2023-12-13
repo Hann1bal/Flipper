@@ -26,4 +26,9 @@
       <Folder Include="wwwroot\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\assets\index-Fkoav8ub.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\assets\index-VhuhJi74.css" />
+    </ItemGroup>
+
 </Project>

@@ -23,7 +23,6 @@ public class CharacterListDownloaderService
     private async Task ParseLadder()
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
-        List<CacheModel> CacheModels = new() { };
         for (int i = 0; i < 7; i++)
         {
             for (int j = 1; j < 4; i++)
@@ -32,50 +31,50 @@ public class CharacterListDownloaderService
                 int counter = 0;
                 while (counter < 15000)
                 {
-                    var t = await _sender.GetFileAsync("Affliction", i, j, counter, _baseUrl);
-                    CacheModels.Add(JsonConvert.DeserializeObject<CacheModel>(t));
+                    var response =
+                        JsonConvert.DeserializeObject<CacheModel>(
+                            await _sender.GetFileAsync("Affliction", i, j, counter, _baseUrl));
                     counter += 200;
                     Thread.Sleep(2000);
-                    foreach (var ts in CacheModels)
+                    foreach (var entrie in response.entries)
                     {
-                        foreach (var entrie in ts.entries)
+                        var isNewAcc = false;
+                        var acc = context.Accounts.Include(c => c.characters)
+                            .FirstOrDefault(c => c.AccountName == entrie.account.name);
+                        if (acc == null)
                         {
-                            var isNewAcc = false;
-                            var acc = context.Accounts.Include(c => c.characters).AsNoTracking()
-                                .FirstOrDefault(c => c.AccountName == entrie.account.name);
-                            if (acc == null)
+                            isNewAcc = true;
+                            acc = new Account
                             {
-                                isNewAcc = true;
-                                acc = new Account();
-                                acc.AccountName = entrie.account.name;
-                            }
-
-                            var character = new Character()
-                            {
-                                id = entrie.character.id,
-                                Class = entrie.character.Class,
-                                Level = entrie.character.Level,
-                                Experiance = entrie.character.Experiance,
-                                Name = entrie.character.Name
+                                AccountName = entrie.account.name
                             };
-
-                            if (acc.characters.Any(c => c.Name == character.Name))
-                            {
-                                var tCharacter = acc.characters.FirstOrDefault(c => c.id == character.id);
-                                tCharacter.Class = character.Class;
-                                tCharacter.Experiance = character.Experiance;
-                                tCharacter.Level = character.Level;
-                                tCharacter.Name = character.Name;
-                            }
-                            else
-                            {
-                                acc.characters.Add(character);
-                            }
-
-
-                            if (isNewAcc) await context.Accounts.AddAsync(acc);
-                            await context.SaveChangesAsync();
                         }
+
+                        var character = new Character()
+                        {
+                            id = entrie.character.id,
+                            Class = entrie.character.Class,
+                            Level = entrie.character.Level,
+                            Experiance = entrie.character.Experiance,
+                            Name = entrie.character.Name
+                        };
+                        if (acc.characters == null) acc.characters = new List<Character>() { character };
+                        if (acc.characters.Any(c => c.Name == character.Name))
+                        {
+                            var tCharacter = acc.characters.FirstOrDefault(c => c.id == character.id);
+                            tCharacter.Class = character.Class;
+                            tCharacter.Experiance = character.Experiance;
+                            tCharacter.Level = character.Level;
+                            tCharacter.Name = character.Name;
+                        }
+                        else
+                        {
+                            acc.characters.Add(character);
+                        }
+
+                        Console.WriteLine($"Track {entrie.account.name}");
+                        if (isNewAcc) await context.Accounts.AddAsync(acc);
+                        await context.SaveChangesAsync();
                     }
                 }
             }
