@@ -23,6 +23,7 @@ public class CharacterListDownloaderService
     private async Task ParseLadder()
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
+        List<CacheModel> CacheModels = new() { };
         for (int i = 0; i < 7; i++)
         {
             for (int j = 1; j < 4; i++)
@@ -72,7 +73,6 @@ public class CharacterListDownloaderService
                             acc.characters.Add(character);
                         }
 
-                        Console.WriteLine($"Track {entrie.account.name}");
                         if (isNewAcc) await context.Accounts.AddAsync(acc);
                         await context.SaveChangesAsync();
                     }
@@ -84,6 +84,5 @@ public class CharacterListDownloaderService
     public async Task GetAccountFromLadder()
     {
         await ParseLadder();
-        Console.WriteLine("1");
     }
 }

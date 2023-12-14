@@ -51,7 +51,6 @@ public class ApiRequestSenderService
                 new Uri(string.Format(url, league, cl, asc, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds()))
         };
         var httpResponse = await client.SendAsync(message).ConfigureAwait(false);
-        Console.WriteLine("end");
         return await httpResponse.Content.ReadAsStringAsync();
     }
 }

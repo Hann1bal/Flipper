@@ -4,6 +4,7 @@ using Flipper.Hubs;
 using Flipper.Models;
 using Flipper.Repository;
 using Flipper.Services;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -13,7 +14,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-        corsPolicyBuilder => { corsPolicyBuilder.WithOrigins("http://localhost:5175", "http://localhost:5173").AllowAnyMethod().AllowAnyHeader().AllowCredentials(); });
+        corsPolicyBuilder =>
+        {
+            corsPolicyBuilder.WithOrigins("http://localhost:5175", "http://localhost:5173",
+                    "http://109.196.164.39:5000", "https://109.196.164.39:5001", "http://109.196.164.39","http://statsofexile.online","statsofexile.online",
+                    "https://109.196.164.39").AllowAnyMethod()
+                .AllowAnyHeader().AllowCredentials();
+        });
 });
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
@@ -25,9 +32,8 @@ builder.Services.AddDbContextFactory<FlipperContext>
 (
     optionsBuilder =>
     {
-        optionsBuilder.EnableDetailedErrors(false);
-        optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-
+        optionsBuilder.UseNpgsql(FlipperContext.GetDatabaseConnectionString());
+        optionsBuilder.EnableDetailedErrors();
     }
 );
 
@@ -38,16 +44,14 @@ builder.Services.AddHttpClient("KnB_API", config =>
     config.DefaultRequestHeaders.Clear();
 });
 builder.Services.AddSingleton<ApiRequestSenderService>();
-builder.Services.AddSingleton<IBaseRepository<Cards>, CardRepository>();
-builder.Services.AddSingleton<IBaseRepository<Currency>, CurrencyRepository>();
-builder.Services.AddSingleton<IBaseRepository<Gem>, GemRepository>();
-builder.Services.AddSingleton<IBaseRepository<Uniq>, UniqRepository>();
-builder.Services.AddSingleton<IBaseRepository<Account>, AccountRepository>();
+builder.Services.AddScoped<IBaseRepository<Cards>, CardRepository>();
+builder.Services.AddScoped<IBaseRepository<Currency>, CurrencyRepository>();
+builder.Services.AddScoped<IBaseRepository<Gem>, GemRepository>();
+builder.Services.AddScoped<IBaseRepository<Uniq>, UniqRepository>();
+builder.Services.AddScoped<IBaseRepository<Account>, AccountRepository>();
 builder.Services.AddSingleton<HttpNinjaService>();
-
 builder.Services.AddSingleton<UpdateService>();
 builder.Services.AddSingleton<CharacterListDownloaderService>();
-
 builder.Services.AddHostedService<TimerService>();
 builder.Services.AddSignalR();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -57,14 +61,18 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 
 app.UseHttpsRedirection();
 app.UseCors();
+app.UseRouting();
 
 app.UseAuthorization();
 app.UseDefaultFiles();
@@ -73,10 +81,14 @@ app.UseStaticFiles();
 app.MapFallbackToFile("index.html");
 
 app.MapControllers();
-System.Diagnostics.Process.Start(new ProcessStartInfo
+if (app.Environment.IsDevelopment())
 {
-    FileName = "http://localhost:5027/index.html",
-    UseShellExecute = true
-});
+    System.Diagnostics.Process.Start(new ProcessStartInfo
+    {
+        FileName = "http://localhost:5001/index.html",
+        UseShellExecute = true
+    });
+}
+
 app.MapHub<GetDataHub>("/data");
-app.Run("http://localhost:5027");
+app.Run();

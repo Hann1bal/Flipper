@@ -2,6 +2,7 @@
 using Flipper.Repository;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace Flipper;
 
@@ -9,11 +10,20 @@ public class FlipperContext : DbContext
 {
     public FlipperContext(DbContextOptions option) : base(option)
     {
-        DbPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "flipper2.db");
-        Console.WriteLine(DbPath);
-        Database.EnsureCreated();
+        
     }
-
+    public static string GetDatabaseConnectionString()
+    {
+        return new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 5432,
+            Database = "flipperdb",
+            Username = "postgres",
+            Password = "4847",
+            Timeout = 300
+        }.ConnectionString;
+    }
     public DbSet<Cards> Cards { get; set; }
     public DbSet<Uniq> Uniqs { get; set; }
     public DbSet<Character> Character { get; set; }
@@ -22,10 +32,7 @@ public class FlipperContext : DbContext
     public DbSet<Currency> Currency { get; set; }
     public DbSet<Description> Descriptions { get; set; }
     public string DbPath { get; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite($"Data Source={DbPath}");
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
